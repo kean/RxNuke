@@ -2,27 +2,34 @@
 
 <p align="center">
 <img src="https://img.shields.io/cocoapods/v/RxNuke.svg?label=version">
-<img src="https://img.shields.io/badge/supports-CocoaPods%20%7C%20Carthage%20%7C%20SwiftPM-green.svg">
+<img src="https://img.shields.io/badge/supports-CocoaPods%20%7C%20Carthage-green.svg">
 <img src="https://img.shields.io/badge/platforms-iOS%20%7C%20macOS%20%7C%20watchOS%20%7C%20tvOS-lightgrey.svg">
 </p>
 
-[RxSwift](https://github.com/ReactiveX/RxSwift) extensions for [Nuke](https://github.com/kean/Nuke).
+This repository contains [RxSwift](https://github.com/ReactiveX/RxSwift) extensions for [Nuke](https://github.com/kean/Nuke) as well as examples of common [use cases](#h_use_cases) solved by Rx.
+
+
+# <a name="h_getting_started"></a>Getting Started
+
+- [Installation Guide](https://github.com/kean/RxNuke/blob/master/Documentation/Guides/Installation%20Guide.md)
+- [Getting Started with RxSwift](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/GettingStarted.md)
+
+
+# <a name="h_usage"></a>Usage
+
+`RxNuke` adds a new `Loading` protocol with a set of methods which returns `RxSwift.Single` observables:
 
 ```swift
 public protocol Loading {
-    func loadImage(with url: URL) -> RxSwift.Single<Image>
-    func loadImage(with urlRequest: URLRequest) -> RxSwift.Single<Image>
-    func loadImage(with request: Nuke.Request) -> RxSwift.Single<Image>
+    func loadImage(with url: URL) -> Single<Image>
+    func loadImage(with urlRequest: URLRequest) -> Single<Image>
+    func loadImage(with request: Nuke.Request) -> Single<Image>
 }
 ```
 
 > See [Traits](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/Traits.md#single) to learn more about `Single`
 
-# <a name="h_usage"></a>Usage
-
-## Basics
-
-Let's start with the basics. Here's an example of how to use a new `RxNuke.Loading` implemented by `Nuke.Manager` to load an image and display the result on success.
+Let's start with the basics. Here's an example of how to use a new `RxNuke.Loading` protocol to load an image and display the result on success:
 
 ```swift
 Nuke.Manager.shared.loadImage(with: url)
@@ -31,12 +38,23 @@ Nuke.Manager.shared.loadImage(with: url)
     .disposed(by: disposeBag)
 ```
 
+## <a name="h_use_cases"></a>Use Cases
 
-## Going From Low to High Resolution
+- [Going From Low to High Resolution](#huc_low_to_high) 
+- [Loading the First Available Image](#huc_loading_first_avail)
+- [Showing Stale Image While Validating It](#huc_showing_stale_first)
+- [Load Multiple Images, Display All at Once](#huc_load_multiple_display_once)
+- [Auto Retry](#huc_auto_retry)
+- [Tracking Activities](#huc_activity_indicator)
+- [Display Placeholder on Failure](#huc_placeholder_on_fail)
+- [In a Table or Collection View](#huc_table_collection_view)
 
-Suppose you want to show users a high-resolution, slow-to-download image. Rather than let them stare a placeholder for a while, you might want to quickly download a smaller thumbnail first. There are at least two ways to implement this using `RxNuke`.
 
-1. Uses [`concat`](http://reactivex.io/documentation/operators/concat.html) operator that results in a **serial** execution. It would first start a thumbnal request, wait until it finishes, and only then start a request for a high-resolution image.
+### <a name="huc_low_to_high"></a>Going From Low to High Resolution
+
+Suppose you want to show users a high-resolution, slow-to-download image. Rather than let them stare a placeholder for a while, you might want to quickly download a smaller thumbnail first. 
+
+You can implement this using [`concat`](http://reactivex.io/documentation/operators/concat.html) operator that results in a **serial** execution. It would first start a thumbnail request, wait until it finishes, and only then start a request for a high-resolution image.
 
 ```swift
 Observable.concat(loader.loadImage(with: lowResUrl).orEmpty,
@@ -44,17 +62,13 @@ Observable.concat(loader.loadImage(with: lowResUrl).orEmpty,
     .observeOn(MainScheduler.instance)
     .subscribe(onNext: { imageView.image = $0 })
     .disposed(by: disposeBag)
-```swift
+```
 
 > `orEmpty` is a custom operator which dismisses errors and complete the sequence instead
 > (equivalent to `func catchErrorJustComplete()` from [RxSwiftExt](https://github.com/RxSwiftCommunity/RxSwiftExt)
 
-2. Uses [`switch`](http://reactivex.io/documentation/operators/switch.html) operator that results in a **concurrent** execution. Both of the requests are going to be started at the same time. If the high-resolution requests finishes first the thumbnail request get cancelled.
 
-// FIXME:
-
-
-## Loading the First Available Image
+### <a name="huc_loading_first_avail"></a>Loading the First Available Image
 
 Suppose you have multiple URLs for the same image. For instance, you might have uploaded an image taken from the camera. In such case, it would be beneficial to first try to get the local URL, and if even that fails, try to get the network URL. It would be a shame to download the image that we may have already locally.
 
@@ -67,10 +81,10 @@ Observable.concat(loader.loadImage(with: localUrl).orEmpty,
     .disposed(by: disposeBag)
 ```
 
-> This use case is very similar "Going From Low to High Resolution", but an addition of `.take(1)` gurantees that we stop execution as soon as we receive the first result.
+> This use case is very similar "Going From Low to High Resolution", but an addition of `.take(1)` guarantees that we stop execution as soon as we receive the first result.
 
 
-## Showing Stale Image While Validating It
+### <a name="huc_showing_stale_first"></a>Showing Stale Image While Validating It
 
 Suppose you want to show users a stale image stored in a disk cache (`Foundation.URLCache`) while you go to the server to validate it.
 
@@ -85,15 +99,10 @@ Observable.concat(loader.loadImage(with: cacheRequest).orEmpty,
     .disposed(by: disposeBag)
 ```
 
-2. concurrent
-
-// FIXME:
-
-
 > See [Image Caching](https://kean.github.io/post/image-caching) to learn more about HTTP cache
 
 
-## Load Multiple Images, Display All at Once
+### <a name="huc_load_multiple_display_once"></a>Load Multiple Images, Display All at Once
 
 Suppose you want to load two icons for a button, one icon for `.normal` state and one for `.selected` state. Only when both icons are loaded you can show the button to the user. This can be done using a [`combineLatest`](http://reactivex.io/documentation/operators/combinelatest.html) operator:
 
@@ -109,7 +118,7 @@ Observable.combineLatest(loader.loadImage(with: iconUrl).asObservable(),
 ```
 
 
-## Auto Retrying
+### <a name="huc_auto_retry"></a>Auto Retry
 
 Auto-retry up to 3 times with an exponentially increasing delay using a retry operator provided by [RxSwiftExt](https://github.com/RxSwiftCommunity/RxSwiftExt).
 
@@ -124,7 +133,7 @@ loader.loadImage(with: request).asObservable()
 > See [A Smarter Retry with RxSwiftExt](http://rx-marin.com/post/rxswift-retry-with-delay/) for more info about auto retries
 
 
-# Activity Indicator
+### <a name="huc_activity_indicator"></a>Tracking Activities
 
 Suppose you want to show an activity indicator while waiting for an image to load. Here's how you can do it using `ActivityIndicator` class provided by [`RxSwiftUtilities`](https://github.com/RxSwiftCommunity/RxSwiftUtilities):
 
@@ -143,9 +152,9 @@ isBusy.asDriver()
 ```
 
 
-# Display Placeholder on Failure
+### <a name="huc_placeholder_on_fail"></a>Display Placeholder on Failure
 
-Shows binding + shows how to dispaly a placeholder if the request fails.
+Shows binding + shows how to display a placeholder if the request fails.
 
 ```swift
 Nuke.Manager.shared.loadImage(with: url).asObservable()
@@ -155,7 +164,8 @@ Nuke.Manager.shared.loadImage(with: url).asObservable()
     .disposed(by: disposeBag)
 ```
 
-## In a Table/Collection View
+
+### <a name="huc_table_collection_view"></a>In a Table or Collection View
 
 Here's an example of an `ImageCell` 
 
@@ -169,12 +179,12 @@ final class ImageCell: UICollectionViewCell {
     // https://github.com/RxSwiftCommunity/NSObject-Rx#nsobjectrx
     private var disposeBag = DisposeBag()
 
-    // <.. create an image view using your prefered way ..>
+    // <.. create an image view using your preferred way ..>
 
     func setImage(_ url: URL) {
 
         // Create a new dispose bag, previous dispose bag gets deallocated
-        // and cancells all previous subscriptions.
+        // and cancels all previous subscriptions.
         disposeBag = DisposeBag()
 
         imageView.image = nil
@@ -188,3 +198,15 @@ final class ImageCell: UICollectionViewCell {
     }
 }
 ```
+
+
+# Requirements<a name="h_requirements"></a>
+
+- iOS 9.0 / watchOS 2.0 / macOS 10.11 / tvOS 9.0
+- Xcode 8
+- Swift 3
+
+
+# License
+
+RxNuke is available under the MIT license. See the LICENSE file for more info.
