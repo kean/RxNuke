@@ -174,9 +174,6 @@ final class ImageCell: UICollectionViewCell {
 
     private var imageView: UIImageView!
     private var loader: RxNuke.Loading = Nuke.Manager.shared
-
-    // As an alternative you could use a dispose bag provided by
-    // https://github.com/RxSwiftCommunity/NSObject-Rx#nsobjectrx
     private var disposeBag = DisposeBag()
 
     // <.. create an image view using your preferred way ..>
