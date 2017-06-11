@@ -5,6 +5,8 @@
 import Nuke
 import RxSwift
 
+// MARK: Loading
+
 public protocol Loading {
     func loadImage(with request: Nuke.Request) -> RxSwift.Single<Image>
 }
@@ -13,6 +15,11 @@ public extension Loading {
     /// Loads an image with the given url.
     public func loadImage(with url: URL) -> RxSwift.Single<Image> {
         return loadImage(with: Nuke.Request(url: url))
+    }
+
+    /// Loads an image with the given url request.
+    public func loadImage(with urlRequest: URLRequest) -> RxSwift.Single<Image> {
+        return loadImage(with: Nuke.Request(urlRequest: urlRequest))
     }
 }
 
@@ -51,5 +58,19 @@ fileprivate func _loadImage<T: Nuke.Loading>(loader: T, request: Nuke.Request) -
             }
         }
         return Disposables.create { cts.cancel() }
+    }
+}
+
+// MARK: RxSwift Extensions
+
+extension RxSwift.PrimitiveSequence where Trait == RxSwift.SingleTrait, Element == Nuke.Image {
+
+    // The reason why it's declared on RxSwift.Single<Image> is to
+    // avoid pollution RxSwift namespace.
+
+    public var orEmpty: Observable<Element> {
+        return self.asObservable().catchError { _ in
+            return .empty()
+        }
     }
 }
