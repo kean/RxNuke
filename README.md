@@ -9,6 +9,18 @@
 This repository contains [RxSwift](https://github.com/ReactiveX/RxSwift) extensions for [Nuke](https://github.com/kean/Nuke) as well as examples of common [use cases](#h_use_cases) solved by Rx.
 
 
+# <a name="h_use_cases"></a>Use Cases
+
+- [Going From Low to High Resolution](#huc_low_to_high) 
+- [Loading the First Available Image](#huc_loading_first_avail)
+- [Showing Stale Image While Validating It](#huc_showing_stale_first)
+- [Load Multiple Images, Display All at Once](#huc_load_multiple_display_once)
+- [Auto Retry](#huc_auto_retry)
+- [Tracking Activities](#huc_activity_indicator)
+- [Display Placeholder on Failure](#huc_placeholder_on_fail)
+- [In a Table or Collection View](#huc_table_collection_view)
+
+
 # <a name="h_getting_started"></a>Getting Started
 
 - [Installation Guide](https://github.com/kean/RxNuke/blob/master/Documentation/Guides/Installation%20Guide.md)
@@ -37,18 +49,6 @@ Nuke.Manager.shared.loadImage(with: url)
     .subscribe(onSuccess: { imageView.image = $0 })
     .disposed(by: disposeBag)
 ```
-
-## <a name="h_use_cases"></a>Use Cases
-
-- [Going From Low to High Resolution](#huc_low_to_high) 
-- [Loading the First Available Image](#huc_loading_first_avail)
-- [Showing Stale Image While Validating It](#huc_showing_stale_first)
-- [Load Multiple Images, Display All at Once](#huc_load_multiple_display_once)
-- [Auto Retry](#huc_auto_retry)
-- [Tracking Activities](#huc_activity_indicator)
-- [Display Placeholder on Failure](#huc_placeholder_on_fail)
-- [In a Table or Collection View](#huc_table_collection_view)
-
 
 ### <a name="huc_low_to_high"></a>Going From Low to High Resolution
 
