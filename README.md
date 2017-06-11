@@ -13,13 +13,12 @@ This repository contains [RxSwift](https://github.com/ReactiveX/RxSwift) extensi
 
 - [Going From Low to High Resolution](#huc_low_to_high) 
 - [Loading the First Available Image](#huc_loading_first_avail)
-- [Showing Stale Image While Validating It](#huc_showing_stale_first)
 - [Load Multiple Images, Display All at Once](#huc_load_multiple_display_once)
+- [Showing Stale Image While Validating It](#huc_showing_stale_first)
 - [Auto Retry](#huc_auto_retry)
 - [Tracking Activities](#huc_activity_indicator)
 - [Display Placeholder on Failure](#huc_placeholder_on_fail)
-- [In a Table or Collection View](#huc_table_collection_view)
-
+- [Table or Collection View](#huc_table_collection_view)
 
 # <a name="h_getting_started"></a>Getting Started
 
@@ -39,7 +38,7 @@ public protocol Loading {
 }
 ```
 
-> See [Traits](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/Traits.md#single) to learn more about `Single`
+> A `Single` is a variation of `Observable` that, instead of emitting a series of elements, is always guaranteed to emit either a single element or an error. The common use case of `Single` is to wrap HTTP requests. See [Traits](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/Traits.md#single) for more info.
 
 Let's start with the basics. Here's an example of how to use a new `RxNuke.Loading` protocol to load an image and display the result on success:
 
@@ -54,7 +53,7 @@ Nuke.Manager.shared.loadImage(with: url)
 
 Suppose you want to show users a high-resolution, slow-to-download image. Rather than let them stare a placeholder for a while, you might want to quickly download a smaller thumbnail first. 
 
-You can implement this using [`concat`](http://reactivex.io/documentation/operators/concat.html) operator that results in a **serial** execution. It would first start a thumbnail request, wait until it finishes, and only then start a request for a high-resolution image.
+You can implement this using [`concat`](http://reactivex.io/documentation/operators/concat.html) operator which results in a **serial** execution. It would first start a thumbnail request, wait until it finishes, and only then start a request for a high-resolution image.
 
 ```swift
 Observable.concat(loader.loadImage(with: lowResUrl).orEmpty,
@@ -64,13 +63,15 @@ Observable.concat(loader.loadImage(with: lowResUrl).orEmpty,
     .disposed(by: disposeBag)
 ```
 
-> `orEmpty` is a custom operator which dismisses errors and complete the sequence instead
+> `orEmpty` is a custom operator which dismisses errors and completes the sequence instead
 > (equivalent to `func catchErrorJustComplete()` from [RxSwiftExt](https://github.com/RxSwiftCommunity/RxSwiftExt)
 
 
 ### <a name="huc_loading_first_avail"></a>Loading the First Available Image
 
-Suppose you have multiple URLs for the same image. For instance, you might have uploaded an image taken from the camera. In such case, it would be beneficial to first try to get the local URL, and if even that fails, try to get the network URL. It would be a shame to download the image that we may have already locally.
+Suppose you have multiple URLs for the same image. For instance, you might have uploaded an image taken from the camera. In such case, it would be beneficial to first try to get the local URL, and if that fails, try to get the network URL. It would be a shame to download the image that we may have already locally.
+
+This use case is very similar [Going From Low to High Resolution](#huc_low_to_high), but an addition of `.take(1)` guarantees that we stop execution as soon as we receive the first result.
 
 ```swift
 Observable.concat(loader.loadImage(with: localUrl).orEmpty,
@@ -80,26 +81,6 @@ Observable.concat(loader.loadImage(with: localUrl).orEmpty,
     .subscribe(onNext: { imageView.image = $0 })
     .disposed(by: disposeBag)
 ```
-
-> This use case is very similar "Going From Low to High Resolution", but an addition of `.take(1)` guarantees that we stop execution as soon as we receive the first result.
-
-
-### <a name="huc_showing_stale_first"></a>Showing Stale Image While Validating It
-
-Suppose you want to show users a stale image stored in a disk cache (`Foundation.URLCache`) while you go to the server to validate it.
-
-```swift
-let cacheRequest = URLRequest(url: imageUrl, cachePolicy: .returnCacheDataDontLoad)
-let networkRequest = URLRequest(url: imageUrl, cachePolicy: .useProtocolCachePolicy)
-
-Observable.concat(loader.loadImage(with: cacheRequest).orEmpty,
-                  loader.loadImage(with: networkRequest).orEmpty)
-    .observeOn(MainScheduler.instance)
-    .subscribe(onNext: { imageView.image = $0 })
-    .disposed(by: disposeBag)
-```
-
-> See [Image Caching](https://kean.github.io/post/image-caching) to learn more about HTTP cache
 
 
 ### <a name="huc_load_multiple_display_once"></a>Load Multiple Images, Display All at Once
@@ -116,6 +97,24 @@ Observable.combineLatest(loader.loadImage(with: iconUrl).asObservable(),
         button.setImage(iconSelected, for: .selected)
     }).disposed(by: disposeBag)
 ```
+
+
+### <a name="huc_showing_stale_first"></a>Showing Stale Image While Validating It
+
+Suppose you want to show users a stale image stored in a disk cache (`Foundation.URLCache`) while you go to the server to validate it. This use case is actually the same as [Going From Low to High Resolution](#huc_low_to_high).
+
+```swift
+let cacheRequest = URLRequest(url: imageUrl, cachePolicy: .returnCacheDataDontLoad)
+let networkRequest = URLRequest(url: imageUrl, cachePolicy: .useProtocolCachePolicy)
+
+Observable.concat(loader.loadImage(with: cacheRequest).orEmpty,
+                  loader.loadImage(with: networkRequest).orEmpty)
+    .observeOn(MainScheduler.instance)
+    .subscribe(onNext: { imageView.image = $0 })
+    .disposed(by: disposeBag)
+```
+
+> See [Image Caching](https://kean.github.io/post/image-caching) to learn more about HTTP cache
 
 
 ### <a name="huc_auto_retry"></a>Auto Retry
@@ -152,22 +151,9 @@ isBusy.asDriver()
 ```
 
 
-### <a name="huc_placeholder_on_fail"></a>Display Placeholder on Failure
-
-Shows binding + shows how to display a placeholder if the request fails.
-
-```swift
-Nuke.Manager.shared.loadImage(with: url).asObservable()
-    .subscribeOn(MainScheduler.instance)
-    .catchErrorJustReturn(placeholder)
-    .bind(to: imageView.rx.image)
-    .disposed(by: disposeBag)
-```
-
-
 ### <a name="huc_table_collection_view"></a>In a Table or Collection View
 
-Here's an example of an `ImageCell` 
+Here's how you can integrate the code provided in the previous examples into your table or collection view cells:
 
 ```swift
 final class ImageCell: UICollectionViewCell {
