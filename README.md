@@ -159,12 +159,11 @@ Here's how you can integrate the code provided in the previous examples into you
 final class ImageCell: UICollectionViewCell {
 
     private var imageView: UIImageView!
-    private var loader: RxNuke.Loading = Nuke.Manager.shared
     private var disposeBag = DisposeBag()
 
     // <.. create an image view using your preferred way ..>
 
-    func setImage(_ url: URL) {
+    func display(_ image: Single<Image>) {
 
         // Create a new dispose bag, previous dispose bag gets deallocated
         // and cancels all previous subscriptions.
@@ -173,8 +172,7 @@ final class ImageCell: UICollectionViewCell {
         imageView.image = nil
 
         // Load an image and display the result on success.
-        loader.loadImage(with: url)
-            .subscribeOn(MainScheduler.instance)
+        image.subscribeOn(MainScheduler.instance)
             .subscribe(onSuccess: { [weak self] image in
                 self?.imageView.image = image
             }).disposed(by: disposeBag)
