@@ -27,13 +27,15 @@ public extension Loading {
 
 extension Nuke.Manager: Loading {
 
-    /// Loads an image with the given request. Returns `.just(image)`
-    /// synchronously in case the image is in memory cache.
+    /// Loads an image with the given request.
     public func loadImage(with request: Nuke.Request) -> RxSwift.Single<Image> {
-        if let image = cachedImage(for: request) {
-            return .just(image) // Return cached image synchronously
-        } else {
-            return _loadImage(loader: self, request: request)
+        return Single<Image>.create { observer in
+            if let image = self.cachedImage(for: request) {
+                observer(.success(image))
+                return Disposables.create() // nop
+            } else {
+                return _loadImage(loader: self, request: request, observer: observer)
+            }
         }
     }
 
@@ -47,22 +49,21 @@ extension Nuke.Loader: Loading {
 
     /// Loads an image with the given request.
     public func loadImage(with request: Nuke.Request) -> RxSwift.Single<Image> {
-        return _loadImage(loader: self, request: request)
+        return Single<Image>.create {
+            _loadImage(loader: self, request: request, observer: $0)
+        }
     }
 }
 
-fileprivate func _loadImage<T: Nuke.Loading>(loader: T, request: Nuke.Request) -> RxSwift.Single<Image> {
-
-    return Single<Image>.create { single in
-        let cts = CancellationTokenSource()
-        loader.loadImage(with: request, token: cts.token) { result in
-            switch result {
-            case let .success(image): single(.success(image))
-            case let .failure(error): single(.error(error))
-            }
+fileprivate func _loadImage<T: Nuke.Loading>(loader: T, request: Nuke.Request, observer: @escaping Single<Image>.SingleObserver) -> Disposable {
+    let cts = CancellationTokenSource()
+    loader.loadImage(with: request, token: cts.token) { result in
+        switch result {
+        case let .success(image): observer(.success(image))
+        case let .failure(error): observer(.error(error))
         }
-        return Disposables.create { cts.cancel() }
     }
+    return Disposables.create { cts.cancel() }
 }
 
 // MARK: RxSwift Extensions
