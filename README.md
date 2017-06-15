@@ -101,7 +101,7 @@ Observable.combineLatest(loader.loadImage(with: iconUrl).asObservable(),
 
 ### <a name="huc_showing_stale_first"></a>Showing Stale Image While Validating It
 
-Suppose you want to show users a stale image stored in a disk cache (`Foundation.URLCache`) while you go to the server to validate it. This use case is actually the same as [Going From Low to High Resolution](#huc_low_to_high).
+Suppose you want to show users a stale image stored in a disk cache (`Foundation.URLCache`) while you go to the server to validate it. This use case is actually similar to [Going From Low to High Resolution](#huc_low_to_high).
 
 ```swift
 let cacheRequest = URLRequest(url: imageUrl, cachePolicy: .returnCacheDataDontLoad)
