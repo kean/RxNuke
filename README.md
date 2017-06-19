@@ -184,8 +184,8 @@ final class ImageCell: UICollectionViewCell {
 # Requirements<a name="h_requirements"></a>
 
 - iOS 9.0 / watchOS 2.0 / macOS 10.11 / tvOS 9.0
-- Xcode 8
-- Swift 3
+- Xcode 8.3
+- Swift 3.1
 
 
 # License
