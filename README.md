@@ -1,4 +1,4 @@
-<p align="center"><img src="https://user-images.githubusercontent.com/1567433/27010376-bc53fa6c-4eab-11e7-9ce3-7d49063fce7f.png" height="180"/>
+<p align="center"><img src="https://user-images.githubusercontent.com/1567433/34322222-f47252a6-e832-11e7-972c-fb48d8ec97dc.png" height="180"/>
 
 <p align="center">
 <img src="https://img.shields.io/cocoapods/v/RxNuke.svg?label=version">
