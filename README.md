@@ -44,7 +44,6 @@ Let's start with the basics. Here's an example of how to use a new `RxNuke.Loadi
 
 ```swift
 Nuke.Manager.shared.loadImage(with: url)
-    .observeOn(MainScheduler.instance)
     .subscribe(onSuccess: { imageView.image = $0 })
     .disposed(by: disposeBag)
 ```
@@ -58,7 +57,6 @@ You can implement this using [`concat`](http://reactivex.io/documentation/operat
 ```swift
 Observable.concat(loader.loadImage(with: lowResUrl).orEmpty,
                   loader.loadImage(with: highResUtl).orEmpty)
-    .observeOn(MainScheduler.instance)
     .subscribe(onNext: { imageView.image = $0 })
     .disposed(by: disposeBag)
 ```
@@ -77,7 +75,6 @@ This use case is very similar [Going From Low to High Resolution](#huc_low_to_hi
 Observable.concat(loader.loadImage(with: localUrl).orEmpty,
                   loader.loadImage(with: networkUrl).orEmpty)
     .take(1)
-    .observeOn(MainScheduler.instance)
     .subscribe(onNext: { imageView.image = $0 })
     .disposed(by: disposeBag)
 ```
@@ -90,7 +87,6 @@ Suppose you want to load two icons for a button, one icon for `.normal` state an
 ```swift
 Observable.combineLatest(loader.loadImage(with: iconUrl).asObservable(),
                          loader.loadImage(with: iconSelectedUrl).asObservable())
-    .observeOn(MainScheduler.instance)
     .subscribe(onNext: { icon, iconSelected in
         button.isHidden = false
         button.setImage(icon, for: .normal)
@@ -109,7 +105,6 @@ let networkRequest = URLRequest(url: imageUrl, cachePolicy: .useProtocolCachePol
 
 Observable.concat(loader.loadImage(with: cacheRequest).orEmpty,
                   loader.loadImage(with: networkRequest).orEmpty)
-    .observeOn(MainScheduler.instance)
     .subscribe(onNext: { imageView.image = $0 })
     .disposed(by: disposeBag)
 ```
@@ -119,17 +114,14 @@ Observable.concat(loader.loadImage(with: cacheRequest).orEmpty,
 
 ### <a name="huc_auto_retry"></a>Auto Retry
 
-Auto-retry up to 3 times with an exponentially increasing delay using a retry operator provided by [RxSwiftExt](https://github.com/RxSwiftCommunity/RxSwiftExt).
+Auto-retry with an exponential backoff of other delay options (including immediate retry when a network connection is re-established) using [smart retry](https://kean.github.io/post/smart-retry).
 
 ```swift
 loader.loadImage(with: request).asObservable()
-    .retry(.exponentialDelayed(maxCount: 3, initial: 3.0, multiplier: 1.0))
-    .observeOn(MainScheduler.instance)
+    .retry(3, delay: .exponential(initial: 3, multiplier: 1, maxDelay: 16))
     .subscribe(onNext: { imageView.image = $0 })
     .disposed(by: disposeBag)
  ```
-
-> See [A Smarter Retry with RxSwiftExt](http://rx-marin.com/post/rxswift-retry-with-delay/) for more info about auto retries
 
 
 ### <a name="huc_activity_indicator"></a>Tracking Activities
@@ -140,7 +132,6 @@ Suppose you want to show an activity indicator while waiting for an image to loa
 let isBusy = ActivityIndicator()
 
 loader.loadImage(with: imageUrl)
-    .observeOn(MainScheduler.instance)
     .trackActivity(isBusy)
     .subscribe(onNext: { imageView.image = $0 })
     .disposed(by: disposeBag)
@@ -172,10 +163,9 @@ final class ImageCell: UICollectionViewCell {
         imageView.image = nil
 
         // Load an image and display the result on success.
-        image.subscribeOn(MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] image in
-                self?.imageView.image = image
-            }).disposed(by: disposeBag)
+        image.subscribe(onSuccess: { [weak self] image in
+            self?.imageView.image = image
+        }).disposed(by: disposeBag)
     }
 }
 ```
