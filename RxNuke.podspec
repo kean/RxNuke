@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'RxNuke'
-    s.version          = '0.5'
+    s.version          = '0.5-rc1'
     s.summary          = 'RxSwift extensions for Nuke'
 
     s.homepage         = 'https://github.com/kean/RxNuke'
