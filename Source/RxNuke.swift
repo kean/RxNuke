@@ -1,33 +1,55 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2017 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2017-2018 Alexander Grebenyuk (github.com/kean).
 
 import Nuke
 import RxSwift
 
-// MARK: Loading
+public extension Nuke.ImagePipeline {
+    public func loadImage(with request: Nuke.ImageRequest) -> RxSwift.Single<Nuke.ImageResponse> {
+        return Single<Nuke.ImageResponse>.create { observer in
+            if let image = self.cachedResponse(for: request) {
+                observer(.success(image)) // return syncrhonously
+                return Disposables.create() // nop
+            } else {
+                let task = self.loadImage(with: request) { response, error in
+                    if let response = response {
+                        observer(.success(response))
+                    } else {
+                        observer(.error(error ?? ImagePipeline.Error.processingFailed)) // error always non-nil
+                    }
+                }
+                return Disposables.create { task.cancel() }
+            }
+        }
+    }
 
-/// Loads images.
+    private func cachedResponse(for request: Nuke.ImageRequest) -> Nuke.ImageResponse? {
+        guard request.memoryCacheOptions.readAllowed else { return nil }
+        return configuration.imageCache?.cachedResponse(for: request)
+    }
+}
+
+// MARK: - Deprecated
+
+@available(*, deprecated, message: "Please use `ImagePipeline` instead")
 public protocol Loading {
     func loadImage(with request: Nuke.Request) -> RxSwift.Single<Image>
 }
 
+@available(*, deprecated, message: "Please use `ImagePipeline` instead")
 public extension Loading {
-
-    /// Loads an image with the given url.
     public func loadImage(with url: URL) -> RxSwift.Single<Image> {
         return loadImage(with: Nuke.Request(url: url))
     }
 
-    /// Loads an image with the given url request.
     public func loadImage(with urlRequest: URLRequest) -> RxSwift.Single<Image> {
         return loadImage(with: Nuke.Request(urlRequest: urlRequest))
     }
 }
 
+@available(*, deprecated, message: "Please use `ImagePipeline` instead")
 extension Nuke.Manager: Loading {
-
-    /// Loads an image with the given request.
     public func loadImage(with request: Nuke.Request) -> RxSwift.Single<Image> {
         return Single<Image>.create { observer in
             if let image = self.cachedImage(for: request) {
@@ -45,9 +67,8 @@ extension Nuke.Manager: Loading {
     }
 }
 
+@available(*, deprecated, message: "Please use `ImagePipeline` instead")
 extension Nuke.Loader: Loading {
-
-    /// Loads an image with the given request.
     public func loadImage(with request: Nuke.Request) -> RxSwift.Single<Image> {
         return Single<Image>.create {
             _loadImage(loader: self, request: request, observer: $0)
@@ -55,6 +76,7 @@ extension Nuke.Loader: Loading {
     }
 }
 
+@available(*, deprecated, message: "Please use `ImagePipeline` instead")
 fileprivate func _loadImage<T: Nuke.Loading>(loader: T, request: Nuke.Request, observer: @escaping Single<Image>.SingleObserver) -> Disposable {
     let cts = CancellationTokenSource()
     loader.loadImage(with: request, token: cts.token) { result in
@@ -66,16 +88,8 @@ fileprivate func _loadImage<T: Nuke.Loading>(loader: T, request: Nuke.Request, o
     return Disposables.create { cts.cancel() }
 }
 
-// MARK: RxSwift Extensions
-
+@available(*, deprecated, message: "Please add an this extension in your codebase.")
 extension RxSwift.PrimitiveSequence where Trait == RxSwift.SingleTrait, Element == Nuke.Image {
-
-    // The reason why it's declared on RxSwift.Single<Image> is to
-    // avoid polluting RxSwift namespace.
-
-    /// Dismiss errors and complete the sequence instead
-    /// - returns: An observable sequence that never errors and completes when
-    /// an error occurs in the underlying sequence
     public var orEmpty: Observable<Element> {
         return self.asObservable().catchError { _ in
             return .empty()
