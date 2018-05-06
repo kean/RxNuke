@@ -5,6 +5,12 @@
 import Nuke
 import RxSwift
 
+#if !os(macOS)
+import UIKit
+#else
+import AppKit
+#endif
+
 public extension Nuke.ImagePipeline {
     public func loadImage(with request: Nuke.ImageRequest) -> RxSwift.Single<Nuke.ImageResponse> {
         return Single<Nuke.ImageResponse>.create { observer in

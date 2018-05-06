@@ -16,6 +16,9 @@
 		0C94CC2D1EEC538D0025B968 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C94CC2B1EEC538D0025B968 /* RxSwift.framework */; };
 		0C94CC301EEC539B0025B968 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C94CC2E1EEC539B0025B968 /* Nuke.framework */; };
 		0C94CC311EEC539B0025B968 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C94CC2F1EEC539B0025B968 /* RxSwift.framework */; };
+		0CC1FD51209EF1B1004162D6 /* RxNuke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F4BFD1EEC4DF4000EA6C7 /* RxNuke.swift */; };
+		0CC1FD52209EF1B2004162D6 /* RxNuke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F4BFD1EEC4DF4000EA6C7 /* RxNuke.swift */; };
+		0CC1FD53209EF1B2004162D6 /* RxNuke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F4BFD1EEC4DF4000EA6C7 /* RxNuke.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -240,7 +243,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0901;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Alexander Grebenyuk";
 				TargetAttributes = {
 					0C6A2ED11BDAA3C700765F15 = {
@@ -317,6 +320,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CC1FD53209EF1B2004162D6 /* RxNuke.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +336,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CC1FD51209EF1B1004162D6 /* RxNuke.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CC1FD52209EF1B2004162D6 /* RxNuke.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,12 +415,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -466,12 +474,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
