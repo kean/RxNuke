@@ -28,13 +28,12 @@ This repository contains [RxSwift](https://github.com/ReactiveX/RxSwift) extensi
 
 # <a name="h_usage"></a>Usage
 
-`RxNuke` adds a new `Loading` protocol with a set of methods which returns `RxSwift.Single` observables:
+`RxNuke` extends `ImagePipeline` with a set of methods which return `RxSwift.Single` observables:
 
 ```swift
-public protocol Loading {
-    func loadImage(with url: URL) -> Single<Image>
-    func loadImage(with urlRequest: URLRequest) -> Single<Image>
-    func loadImage(with request: Nuke.Request) -> Single<Image>
+extension ImagePipeline {
+    func loadImage(with url: URL) -> Single<ImageResponse>
+    func loadImage(with request: ImageRequest) -> Single<ImageResponse>
 }
 ```
 
@@ -43,8 +42,8 @@ public protocol Loading {
 Let's start with the basics. Here's an example of how to use a new `RxNuke.Loading` protocol to load an image and display the result on success:
 
 ```swift
-Nuke.Manager.shared.loadImage(with: url)
-    .subscribe(onSuccess: { imageView.image = $0 })
+ImagePipeline.shared.loadImage(with: url)
+    .subscribe(onSuccess: { imageView.image = $0.image })
     .disposed(by: disposeBag)
 ```
 
@@ -55,9 +54,9 @@ Suppose you want to show users a high-resolution, slow-to-download image. Rather
 You can implement this using [`concat`](http://reactivex.io/documentation/operators/concat.html) operator which results in a **serial** execution. It would first start a thumbnail request, wait until it finishes, and only then start a request for a high-resolution image.
 
 ```swift
-Observable.concat(loader.loadImage(with: lowResUrl).orEmpty,
-                  loader.loadImage(with: highResUtl).orEmpty)
-    .subscribe(onNext: { imageView.image = $0 })
+Observable.concat(pipeline.loadImage(with: lowResUrl).orEmpty,
+                  pipeline.loadImage(with: highResUtl).orEmpty)
+    .subscribe(onNext: { imageView.image = $0.image })
     .disposed(by: disposeBag)
 ```
 
@@ -72,10 +71,10 @@ Suppose you have multiple URLs for the same image. For instance, you might have 
 This use case is very similar [Going From Low to High Resolution](#huc_low_to_high), but an addition of `.take(1)` guarantees that we stop execution as soon as we receive the first result.
 
 ```swift
-Observable.concat(loader.loadImage(with: localUrl).orEmpty,
-                  loader.loadImage(with: networkUrl).orEmpty)
+Observable.concat(pipeline.loadImage(with: localUrl).orEmpty,
+                  pipeline.loadImage(with: networkUrl).orEmpty)
     .take(1)
-    .subscribe(onNext: { imageView.image = $0 })
+    .subscribe(onNext: { imageView.image = $0.image })
     .disposed(by: disposeBag)
 ```
 
@@ -85,12 +84,12 @@ Observable.concat(loader.loadImage(with: localUrl).orEmpty,
 Suppose you want to load two icons for a button, one icon for `.normal` state and one for `.selected` state. Only when both icons are loaded you can show the button to the user. This can be done using a [`combineLatest`](http://reactivex.io/documentation/operators/combinelatest.html) operator:
 
 ```swift
-Observable.combineLatest(loader.loadImage(with: iconUrl).asObservable(),
-                         loader.loadImage(with: iconSelectedUrl).asObservable())
+Observable.combineLatest(pipeline.loadImage(with: iconUrl).asObservable(),
+                         pipeline.loadImage(with: iconSelectedUrl).asObservable())
     .subscribe(onNext: { icon, iconSelected in
         button.isHidden = false
-        button.setImage(icon, for: .normal)
-        button.setImage(iconSelected, for: .selected)
+        button.setImage(icon.image, for: .normal)
+        button.setImage(iconSelected.image, for: .selected)
     }).disposed(by: disposeBag)
 ```
 
@@ -103,9 +102,9 @@ Suppose you want to show users a stale image stored in a disk cache (`Foundation
 let cacheRequest = URLRequest(url: imageUrl, cachePolicy: .returnCacheDataDontLoad)
 let networkRequest = URLRequest(url: imageUrl, cachePolicy: .useProtocolCachePolicy)
 
-Observable.concat(loader.loadImage(with: cacheRequest).orEmpty,
-                  loader.loadImage(with: networkRequest).orEmpty)
-    .subscribe(onNext: { imageView.image = $0 })
+Observable.concat(pipeline.loadImage(with: ImageRequest(urlRequest: cacheRequest).orEmpty,
+                  pipeline.loadImage(with: ImageRequest(urlRequest: networkRequest)).orEmpty)
+    .subscribe(onNext: { imageView.image = $0.image })
     .disposed(by: disposeBag)
 ```
 
@@ -117,9 +116,9 @@ Observable.concat(loader.loadImage(with: cacheRequest).orEmpty,
 Auto-retry with an exponential backoff of other delay options (including immediate retry when a network connection is re-established) using [smart retry](https://kean.github.io/post/smart-retry).
 
 ```swift
-loader.loadImage(with: request).asObservable()
+pipeline.loadImage(with: request).asObservable()
     .retry(3, delay: .exponential(initial: 3, multiplier: 1, maxDelay: 16))
-    .subscribe(onNext: { imageView.image = $0 })
+    .subscribe(onNext: { imageView.image = $0.image })
     .disposed(by: disposeBag)
  ```
 
@@ -131,9 +130,9 @@ Suppose you want to show an activity indicator while waiting for an image to loa
 ```swift
 let isBusy = ActivityIndicator()
 
-loader.loadImage(with: imageUrl)
+pipeline.loadImage(with: imageUrl)
     .trackActivity(isBusy)
-    .subscribe(onNext: { imageView.image = $0 })
+    .subscribe(onNext: { imageView.image = $0.image })
     .disposed(by: disposeBag)
 
 isBusy.asDriver()
@@ -148,13 +147,12 @@ Here's how you can integrate the code provided in the previous examples into you
 
 ```swift
 final class ImageCell: UICollectionViewCell {
-
     private var imageView: UIImageView!
     private var disposeBag = DisposeBag()
 
     // <.. create an image view using your preferred way ..>
 
-    func display(_ image: Single<Image>) {
+    func display(_ image: Single<ImageResponse>) {
 
         // Create a new dispose bag, previous dispose bag gets deallocated
         // and cancels all previous subscriptions.
@@ -163,8 +161,8 @@ final class ImageCell: UICollectionViewCell {
         imageView.image = nil
 
         // Load an image and display the result on success.
-        image.subscribe(onSuccess: { [weak self] image in
-            self?.imageView.image = image
+        image.subscribe(onSuccess: { [weak self] response in
+            self?.imageView.image = response.image
         }).disposed(by: disposeBag)
     }
 }
@@ -174,8 +172,8 @@ final class ImageCell: UICollectionViewCell {
 # Requirements<a name="h_requirements"></a>
 
 - iOS 9.0 / watchOS 2.0 / macOS 10.11 / tvOS 9.0
-- Xcode 9
-- Swift 4
+- Xcode 9.3
+- Swift 4.1
 
 
 # License
