@@ -168,12 +168,12 @@ final class ImageCell: UICollectionViewCell {
 }
 ```
 
-
-# Requirements<a name="h_requirements"></a>
+<a name="h_requirements"></a>
+# Minimum Requirements
 
 - iOS 9.0 / watchOS 2.0 / macOS 10.11 / tvOS 9.0
-- Xcode 9.3
-- Swift 4.1
+- Xcode 9.2
+- Swift 4.0
 
 
 # License

@@ -31,19 +31,19 @@ public extension Nuke.ImagePipeline {
     }
 
     private func cachedResponse(for request: Nuke.ImageRequest) -> Nuke.ImageResponse? {
-        guard request.memoryCacheOptions.readAllowed else { return nil }
+        guard request.memoryCacheOptions.isReadAllowed else { return nil }
         return configuration.imageCache?.cachedResponse(for: request)
     }
 }
 
 // MARK: - Deprecated
 
-@available(*, deprecated, message: "Please use `ImagePipeline` instead")
+@available(*, deprecated, message: "Please use `ImagePipeline` instead.")
 public protocol Loading {
     func loadImage(with request: Nuke.Request) -> RxSwift.Single<Image>
 }
 
-@available(*, deprecated, message: "Please use `ImagePipeline` instead")
+@available(*, deprecated, message: "Please use `ImagePipeline` instead.")
 public extension Loading {
     public func loadImage(with url: URL) -> RxSwift.Single<Image> {
         return loadImage(with: Nuke.Request(url: url))
@@ -54,7 +54,7 @@ public extension Loading {
     }
 }
 
-@available(*, deprecated, message: "Please use `ImagePipeline` instead")
+@available(*, deprecated, message: "Please use `ImagePipeline` instead.")
 extension Nuke.Manager: Loading {
     public func loadImage(with request: Nuke.Request) -> RxSwift.Single<Image> {
         return Single<Image>.create { observer in
@@ -73,7 +73,7 @@ extension Nuke.Manager: Loading {
     }
 }
 
-@available(*, deprecated, message: "Please use `ImagePipeline` instead")
+@available(*, deprecated, message: "Please use `ImagePipeline` instead.")
 extension Nuke.Loader: Loading {
     public func loadImage(with request: Nuke.Request) -> RxSwift.Single<Image> {
         return Single<Image>.create {
@@ -82,7 +82,7 @@ extension Nuke.Loader: Loading {
     }
 }
 
-@available(*, deprecated, message: "Please use `ImagePipeline` instead")
+@available(*, deprecated, message: "Please use `ImagePipeline` instead.")
 fileprivate func _loadImage<T: Nuke.Loading>(loader: T, request: Nuke.Request, observer: @escaping Single<Image>.SingleObserver) -> Disposable {
     let cts = CancellationTokenSource()
     loader.loadImage(with: request, token: cts.token) { result in
@@ -94,7 +94,7 @@ fileprivate func _loadImage<T: Nuke.Loading>(loader: T, request: Nuke.Request, o
     return Disposables.create { cts.cancel() }
 }
 
-@available(*, deprecated, message: "Please add an this extension in your codebase.")
+@available(*, deprecated, message: "If you'd like to continue using this property please consider adding it in your codebase.")
 extension RxSwift.PrimitiveSequence where Trait == RxSwift.SingleTrait, Element == Nuke.Image {
     public var orEmpty: Observable<Element> {
         return self.asObservable().catchError { _ in
