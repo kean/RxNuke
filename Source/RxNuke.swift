@@ -12,6 +12,10 @@ import AppKit
 #endif
 
 public extension Nuke.ImagePipeline {
+    public func loadImage(with url: URL) -> RxSwift.Single<Nuke.ImageResponse> {
+        return loadImage(with: ImageRequest(url: url))
+    }
+
     public func loadImage(with request: Nuke.ImageRequest) -> RxSwift.Single<Nuke.ImageResponse> {
         return Single<Nuke.ImageResponse>.create { observer in
             if let image = self.cachedResponse(for: request) {
