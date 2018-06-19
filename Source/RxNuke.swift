@@ -14,11 +14,14 @@ import AppKit
 extension ImagePipeline: ReactiveCompatible {}
 
 public extension Reactive where Base: ImagePipeline {
-
+    /// Loads an image with a given url. Emits the value synchronously if the
+    /// image was found in memory cache.
     public func loadImage(with url: URL) -> Single<ImageResponse> {
         return self.loadImage(with: ImageRequest(url: url))
     }
 
+    /// Loads an image with a given request. Emits the value synchronously if the
+    /// image was found in memory cache.
     public func loadImage(with request: ImageRequest) -> Single<ImageResponse> {
         return Single<ImageResponse>.create { single in
             if let image = self.cachedResponse(for: request) {
@@ -40,5 +43,19 @@ public extension Reactive where Base: ImagePipeline {
     private func cachedResponse(for request: ImageRequest) -> ImageResponse? {
         guard request.memoryCacheOptions.isReadAllowed else { return nil }
         return base.configuration.imageCache?.cachedResponse(for: request)
+    }
+}
+
+// MARK: - Deprecated
+
+extension ImagePipeline {
+    @available(*, deprecated, message: "Please use `rx.loadImage(with:)` instead.")
+    public func loadImage(with url: URL) -> Single<ImageResponse> {
+        return rx.loadImage(with: url)
+    }
+
+    @available(*, deprecated, message: "Please use `rx.loadImage(with:)` instead.")
+    public func loadImage(with request: ImageRequest) -> Single<ImageResponse> {
+        return rx.loadImage(with: request)
     }
 }
