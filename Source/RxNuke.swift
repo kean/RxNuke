@@ -62,9 +62,10 @@ public extension Reactive where Base: ImagePipeline {
 }
 
 private extension PrimitiveSequence where Trait == SingleTrait {
+    /// Dismiss errors and complete the sequence instead
+    /// - returns: An observable sequence that never errors.
     func orEmpty() -> Observable<Element> {
-        return asObservable()
-            .catchError { _ in .empty() }
+        return asObservable().catchError { _ in .empty() }
     }
 }
 
