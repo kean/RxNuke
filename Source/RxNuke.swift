@@ -25,13 +25,13 @@ public extension Reactive where Base: ImagePipeline {
         return self.load(with: request)
     }
     
-    /// Loads an image with a given url. Emits an ImageResponse value otherwise
+    /// Loads an image with a given url. Emits ImageResponse otherwise
     /// dismisses errors and completes the sequence.
     public func loadImage(with url: URL) -> Observable<ImageResponse> {
         return self.load(with: ImageRequest(url: url)).orEmpty()
     }
 
-    /// Loads an image with a given request.  Emits an ImageResponse value otherwise
+    /// Loads an image with a given request. Emits ImageResponse otherwise
     /// dismisses errors and completes the sequence.
     public func loadImage(with request: ImageRequest) -> Observable<ImageResponse> {
         return self.load(with: request).orEmpty()
@@ -40,7 +40,7 @@ public extension Reactive where Base: ImagePipeline {
     private func load(with imageRequest: ImageRequest) -> Single<ImageResponse> {
         return Single<ImageResponse>.create { single in
             if let image = self.cachedResponse(for: imageRequest) {
-                single(.success(image)) // return syncrhonously
+                single(.success(image)) // return synchronously
                 return Disposables.create() // nop
             } else {
                 let task = self.base.loadImage(with: imageRequest) { response, error in
