@@ -28,21 +28,21 @@ This repository contains [RxSwift](https://github.com/ReactiveX/RxSwift) extensi
 
 # <a name="h_usage"></a>Usage
 
-`RxNuke` extends `ImagePipeline` with a set of methods which return `RxSwift.Single` observables:
+RxNuke provides a set of reactive extensions for Nuke:
 
 ```swift
-extension ImagePipeline {
-    func loadImage(with url: URL) -> Single<ImageResponse>
-    func loadImage(with request: ImageRequest) -> Single<ImageResponse>
+extension Reactive where Base: ImagePipeline {
+    public func loadImage(with url: URL) -> Single<ImageResponse>
+    public func loadImage(with request: ImageRequest) -> Single<ImageResponse>
 }
 ```
 
 > A `Single` is a variation of `Observable` that, instead of emitting a series of elements, is always guaranteed to emit either a single element or an error. The common use case of `Single` is to wrap HTTP requests. See [Traits](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/Traits.md#single) for more info.
 
-Let's start with the basics. Here's an example of how to use a new `RxNuke.Loading` protocol to load an image and display the result on success:
+Here's a basic example where we load an image and display the result on success:
 
 ```swift
-ImagePipeline.shared.loadImage(with: url)
+ImagePipeline.shared.rx.loadImage(with: url)
     .subscribe(onSuccess: { imageView.image = $0.image })
     .disposed(by: disposeBag)
 ```
@@ -54,15 +54,20 @@ Suppose you want to show users a high-resolution, slow-to-download image. Rather
 You can implement this using [`concat`](http://reactivex.io/documentation/operators/concat.html) operator which results in a **serial** execution. It would first start a thumbnail request, wait until it finishes, and only then start a request for a high-resolution image.
 
 ```swift
-Observable.concat(pipeline.loadImage(with: lowResUrl).orEmpty,
-                  pipeline.loadImage(with: highResUtl).orEmpty)
+Observable.concat(pipeline.rx.loadImage(with: lowResUrl).orEmpty,
+                  pipeline.rx.loadImage(with: highResUtl).orEmpty)
     .subscribe(onNext: { imageView.image = $0.image })
     .disposed(by: disposeBag)
 ```
 
-> `orEmpty` is a custom operator which dismisses errors and completes the sequence instead
-> (equivalent to `func catchErrorJustComplete()` from [RxSwiftExt](https://github.com/RxSwiftCommunity/RxSwiftExt)
-
+> `orEmpty` is a custom property which ignores errors and completes the sequence instead
+> (equivalent to `func catchErrorJustComplete()` from [RxSwiftExt](https://github.com/RxSwiftCommunity/RxSwiftExt).
+>
+>     extension RxSwift.PrimitiveSequence where Trait == RxSwift.SingleTrait {
+>         public var orEmpty: Observable<Element> {
+>             return self.asObservable().catchError { _ in .empty() }
+>         }
+>     }
 
 ### <a name="huc_loading_first_avail"></a>Loading the First Available Image
 
@@ -71,8 +76,8 @@ Suppose you have multiple URLs for the same image. For instance, you might have 
 This use case is very similar [Going From Low to High Resolution](#huc_low_to_high), but an addition of `.take(1)` guarantees that we stop execution as soon as we receive the first result.
 
 ```swift
-Observable.concat(pipeline.loadImage(with: localUrl).orEmpty,
-                  pipeline.loadImage(with: networkUrl).orEmpty)
+Observable.concat(pipeline.rx.loadImage(with: localUrl).orEmpty,
+                  pipeline.rx.loadImage(with: networkUrl).orEmpty)
     .take(1)
     .subscribe(onNext: { imageView.image = $0.image })
     .disposed(by: disposeBag)
@@ -84,8 +89,8 @@ Observable.concat(pipeline.loadImage(with: localUrl).orEmpty,
 Suppose you want to load two icons for a button, one icon for `.normal` state and one for `.selected` state. Only when both icons are loaded you can show the button to the user. This can be done using a [`combineLatest`](http://reactivex.io/documentation/operators/combinelatest.html) operator:
 
 ```swift
-Observable.combineLatest(pipeline.loadImage(with: iconUrl).asObservable(),
-                         pipeline.loadImage(with: iconSelectedUrl).asObservable())
+Observable.combineLatest(pipeline.rx.loadImage(with: iconUrl).asObservable(),
+                         pipeline.rx.loadImage(with: iconSelectedUrl).asObservable())
     .subscribe(onNext: { icon, iconSelected in
         button.isHidden = false
         button.setImage(icon.image, for: .normal)
@@ -102,8 +107,8 @@ Suppose you want to show users a stale image stored in a disk cache (`Foundation
 let cacheRequest = URLRequest(url: imageUrl, cachePolicy: .returnCacheDataDontLoad)
 let networkRequest = URLRequest(url: imageUrl, cachePolicy: .useProtocolCachePolicy)
 
-Observable.concat(pipeline.loadImage(with: ImageRequest(urlRequest: cacheRequest).orEmpty,
-                  pipeline.loadImage(with: ImageRequest(urlRequest: networkRequest)).orEmpty)
+Observable.concat(pipeline.rx.loadImage(with: ImageRequest(urlRequest: cacheRequest).orEmpty,
+                  pipeline.rx.loadImage(with: ImageRequest(urlRequest: networkRequest)).orEmpty)
     .subscribe(onNext: { imageView.image = $0.image })
     .disposed(by: disposeBag)
 ```
@@ -116,7 +121,7 @@ Observable.concat(pipeline.loadImage(with: ImageRequest(urlRequest: cacheRequest
 Auto-retry with an exponential backoff of other delay options (including immediate retry when a network connection is re-established) using [smart retry](https://kean.github.io/post/smart-retry).
 
 ```swift
-pipeline.loadImage(with: request).asObservable()
+pipeline.rx.loadImage(with: request).asObservable()
     .retry(3, delay: .exponential(initial: 3, multiplier: 1, maxDelay: 16))
     .subscribe(onNext: { imageView.image = $0.image })
     .disposed(by: disposeBag)
@@ -130,7 +135,7 @@ Suppose you want to show an activity indicator while waiting for an image to loa
 ```swift
 let isBusy = ActivityIndicator()
 
-pipeline.loadImage(with: imageUrl)
+pipeline.rx.loadImage(with: imageUrl)
     .trackActivity(isBusy)
     .subscribe(onNext: { imageView.image = $0.image })
     .disposed(by: disposeBag)
