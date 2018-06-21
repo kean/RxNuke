@@ -14,21 +14,36 @@ import AppKit
 extension ImagePipeline: ReactiveCompatible {}
 
 public extension Reactive where Base: ImagePipeline {
-    /// Loads an image with a given url. Emits the value synchronously if the
-    /// image was found in memory cache.
+    /// Loads an image with a given url. Emits a single ImageResponse value otherwise error.
     public func loadImage(with url: URL) -> Single<ImageResponse> {
-        return self.loadImage(with: ImageRequest(url: url))
+        let imageRequest = ImageRequest(url: url)
+        return self.load(with: imageRequest)
     }
 
-    /// Loads an image with a given request. Emits the value synchronously if the
-    /// image was found in memory cache.
+    /// Loads an image with a given request. Emits a single ImageResponse value otherwise error.
     public func loadImage(with request: ImageRequest) -> Single<ImageResponse> {
+        return self.load(with: request)
+    }
+    
+    /// Loads an image with a given url. Emits ImageResponse otherwise
+    /// dismisses errors and completes the sequence.
+    public func loadImage(with url: URL) -> Observable<ImageResponse> {
+        return self.load(with: ImageRequest(url: url)).orEmpty()
+    }
+
+    /// Loads an image with a given request. Emits ImageResponse otherwise
+    /// dismisses errors and completes the sequence.
+    public func loadImage(with request: ImageRequest) -> Observable<ImageResponse> {
+        return self.load(with: request).orEmpty()
+    }
+    
+    private func load(with imageRequest: ImageRequest) -> Single<ImageResponse> {
         return Single<ImageResponse>.create { single in
-            if let image = self.cachedResponse(for: request) {
+            if let image = self.cachedResponse(for: imageRequest) {
                 single(.success(image)) // return synchronously
                 return Disposables.create() // nop
             } else {
-                let task = self.base.loadImage(with: request) { response, error in
+                let task = self.base.loadImage(with: imageRequest) { response, error in
                     if let response = response {
                         single(.success(response))
                     } else {
@@ -43,6 +58,14 @@ public extension Reactive where Base: ImagePipeline {
     private func cachedResponse(for request: ImageRequest) -> ImageResponse? {
         guard request.memoryCacheOptions.isReadAllowed else { return nil }
         return base.configuration.imageCache?.cachedResponse(for: request)
+    }
+}
+
+private extension PrimitiveSequence where Trait == SingleTrait {
+    /// Dismiss errors and complete the sequence instead
+    /// - returns: An observable sequence that never errors.
+    func orEmpty() -> Observable<Element> {
+        return asObservable().catchError { _ in .empty() }
     }
 }
 
