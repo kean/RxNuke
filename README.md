@@ -63,7 +63,7 @@ Observable.concat(pipeline.rx.loadImage(with: lowResUrl).orEmpty,
 > `orEmpty` is a custom property which ignores errors and completes the sequence instead
 > (equivalent to `func catchErrorJustComplete()` from [RxSwiftExt](https://github.com/RxSwiftCommunity/RxSwiftExt).
 >
->     extension RxSwift.PrimitiveSequence where Trait == RxSwift.SingleTrait {
+>     extension RxSwift.PrimitiveSequence {
 >         public var orEmpty: Observable<Element> {
 >             return self.asObservable().catchError { _ in .empty() }
 >         }

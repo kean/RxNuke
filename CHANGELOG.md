@@ -1,5 +1,9 @@
  [Changelog](https://github.com/kean/RxNuke/releases) for all versions
 
+## RxNuke 0.7
+
+- #7, Move methods to `Reactive` extension which is a standard practice in RxSwift. Thanks to @jdisho.
+
 ## RxNuke 0.6
 
 - Add missing `public func loadImage(with url: URL) -> RxSwift.Single<Nuke.ImageResponse>` function

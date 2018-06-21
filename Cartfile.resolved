@@ -1,2 +1,2 @@
-github "kean/Nuke" "7.0"
-github "ReactiveX/RxSwift" "4.1.2"
+github "kean/Nuke" "7.2.1"
+github "ReactiveX/RxSwift" "4.2.0"
