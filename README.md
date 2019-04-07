@@ -174,12 +174,12 @@ final class ImageCell: UICollectionViewCell {
 ```
 
 <a name="h_requirements"></a>
-# Minimum Requirements
+# Requirements
 
-- iOS 9.0 / watchOS 2.0 / macOS 10.11 / tvOS 9.0
-- Xcode 9.2
-- Swift 4.0
-
+| RxNuke           | Swift                 | Xcode                | Platforms                                          |
+|------------------|-----------------------|----------------------|----------------------------------------------------|
+| RxNuke 0.8       | Swift 4.2 – 5.0       | Xcode 10.1 – 10.2    | iOS 10.0 / watchOS 3.0 / macOS 10.12 / tvOS 10.0   |
+| RxNuke 0.7       | Swift 4.0 – 4.2       | Xcode 9.2 – 10.1     | iOS 9.0 / watchOS 2.0 / macOS 10.10 / tvOS 9.0     | 
 
 # License
 
