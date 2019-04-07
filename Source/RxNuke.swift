@@ -45,17 +45,3 @@ public extension Reactive where Base: ImagePipeline {
         return base.configuration.imageCache?.cachedResponse(for: request)
     }
 }
-
-// MARK: - Deprecated
-
-extension ImagePipeline {
-    @available(*, deprecated, message: "Please use `rx.loadImage(with:)` instead.")
-    public func loadImage(with url: URL) -> Single<ImageResponse> {
-        return rx.loadImage(with: url)
-    }
-
-    @available(*, deprecated, message: "Please use `rx.loadImage(with:)` instead.")
-    public func loadImage(with request: ImageRequest) -> Single<ImageResponse> {
-        return rx.loadImage(with: request)
-    }
-}
