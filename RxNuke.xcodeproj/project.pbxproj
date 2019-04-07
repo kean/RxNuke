@@ -302,7 +302,6 @@
 				PRODUCT_NAME = RxNuke;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -326,7 +325,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.kean.RxNuke;
 				PRODUCT_NAME = RxNuke;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
