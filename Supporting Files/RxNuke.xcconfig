@@ -1,0 +1,20 @@
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+SUPPORTED_PLATFORMS = iphoneos macosx appletvos watchos iphonesimulator appletvsimulator watchsimulator
+
+SWIFT_VERSION = 5.0
+
+IPHONEOS_DEPLOYMENT_TARGET = 10.0
+MACOSX_DEPLOYMENT_TARGET = 10.12
+TVOS_DEPLOYMENT_TARGET = 10.0
+WATCHOS_DEPLOYMENT_TARGET = 3.0
+
+FRAMEWORK_SEARCH_PATHS[sdk=appletvos*] = $(PROJECT_DIR)/Carthage/Build/tvOS
+FRAMEWORK_SEARCH_PATHS[sdk=appletvsimulator*] = $(PROJECT_DIR)/Carthage/Build/tvOS
+FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*] = $(PROJECT_DIR)/Carthage/Build/iOS
+FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*] = $(PROJECT_DIR)/Carthage/Build/iOS
+FRAMEWORK_SEARCH_PATHS[sdk=macosx*] = $(PROJECT_DIR)/Carthage/Build/Mac
+FRAMEWORK_SEARCH_PATHS[sdk=watchos*] = $(PROJECT_DIR)/Carthage/Build/watchOS
+FRAMEWORK_SEARCH_PATHS[sdk=watchsimulator*] = $(PROJECT_DIR)/Carthage/Build/watchOS

@@ -8,22 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0C7F4BFE1EEC4DF4000EA6C7 /* RxNuke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F4BFD1EEC4DF4000EA6C7 /* RxNuke.swift */; };
-		0C94CC221EEC50D80025B968 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C94CC201EEC50D80025B968 /* Nuke.framework */; };
-		0C94CC251EEC53700025B968 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C94CC241EEC53700025B968 /* RxSwift.framework */; };
-		0C94CC281EEC537F0025B968 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C94CC261EEC537F0025B968 /* Nuke.framework */; };
-		0C94CC291EEC537F0025B968 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C94CC271EEC537F0025B968 /* RxSwift.framework */; };
-		0C94CC2C1EEC538D0025B968 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C94CC2A1EEC538D0025B968 /* Nuke.framework */; };
-		0C94CC2D1EEC538D0025B968 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C94CC2B1EEC538D0025B968 /* RxSwift.framework */; };
-		0C94CC301EEC539B0025B968 /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C94CC2E1EEC539B0025B968 /* Nuke.framework */; };
-		0C94CC311EEC539B0025B968 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C94CC2F1EEC539B0025B968 /* RxSwift.framework */; };
-		0CC1FD51209EF1B1004162D6 /* RxNuke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F4BFD1EEC4DF4000EA6C7 /* RxNuke.swift */; };
-		0CC1FD52209EF1B2004162D6 /* RxNuke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F4BFD1EEC4DF4000EA6C7 /* RxNuke.swift */; };
-		0CC1FD53209EF1B2004162D6 /* RxNuke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C7F4BFD1EEC4DF4000EA6C7 /* RxNuke.swift */; };
-		82A5DEB72255D0DD00BE809A /* RxNuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C6A2ED21BDAA3C700765F15 /* RxNuke.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C6A2ED21BDAA3C700765F15 /* RxNuke.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxNuke.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C2EE5C1225A663200743F47 /* RxNuke.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = RxNuke.xcconfig; sourceTree = "<group>"; };
 		0C7F4BFD1EEC4DF4000EA6C7 /* RxNuke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxNuke.swift; sourceTree = "<group>"; };
 		0C8D254F1BCC33730029A841 /* RxNuke.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxNuke.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C8D255E1BCC33C40029A841 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -35,45 +23,13 @@
 		0C94CC2B1EEC538D0025B968 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/tvOS/RxSwift.framework; sourceTree = "<group>"; };
 		0C94CC2E1EEC539B0025B968 /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/watchOS/Nuke.framework; sourceTree = "<group>"; };
 		0C94CC2F1EEC539B0025B968 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/watchOS/RxSwift.framework; sourceTree = "<group>"; };
-		0CD205BF1BCC688800B88F70 /* RxNuke.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxNuke.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0CD205D21BCC693F00B88F70 /* RxNuke.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxNuke.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0C6A2ECE1BDAA3C700765F15 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0C94CC2D1EEC538D0025B968 /* RxSwift.framework in Frameworks */,
-				0C94CC2C1EEC538D0025B968 /* Nuke.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0C8D254B1BCC33730029A841 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C94CC251EEC53700025B968 /* RxSwift.framework in Frameworks */,
-				0C94CC221EEC50D80025B968 /* Nuke.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CD205BB1BCC688800B88F70 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0C94CC311EEC539B0025B968 /* RxSwift.framework in Frameworks */,
-				0C94CC301EEC539B0025B968 /* Nuke.framework in Frameworks */,
-				82A5DEB72255D0DD00BE809A /* RxNuke.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CD205CE1BCC693F00B88F70 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0C94CC291EEC537F0025B968 /* RxSwift.framework in Frameworks */,
-				0C94CC281EEC537F0025B968 /* Nuke.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,9 +50,6 @@
 			isa = PBXGroup;
 			children = (
 				0C8D254F1BCC33730029A841 /* RxNuke.framework */,
-				0CD205BF1BCC688800B88F70 /* RxNuke.framework */,
-				0CD205D21BCC693F00B88F70 /* RxNuke.framework */,
-				0C6A2ED21BDAA3C700765F15 /* RxNuke.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				0C8D255E1BCC33C40029A841 /* Info.plist */,
+				0C2EE5C1225A663200743F47 /* RxNuke.xcconfig */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -135,28 +89,7 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		0C6A2ECF1BDAA3C700765F15 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0C8D254C1BCC33730029A841 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CD205BC1BCC688800B88F70 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CD205CF1BCC693F00B88F70 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -166,27 +99,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0C6A2ED11BDAA3C700765F15 /* RxNuke tvOS */ = {
+		0C8D254E1BCC33730029A841 /* RxNuke */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0C6A2ED91BDAA3C700765F15 /* Build configuration list for PBXNativeTarget "RxNuke tvOS" */;
-			buildPhases = (
-				0C6A2ECD1BDAA3C700765F15 /* Sources */,
-				0C6A2ECE1BDAA3C700765F15 /* Frameworks */,
-				0C6A2ECF1BDAA3C700765F15 /* Headers */,
-				0C6A2ED01BDAA3C700765F15 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "RxNuke tvOS";
-			productName = "Nuke tvOS Alamofire Plugin";
-			productReference = 0C6A2ED21BDAA3C700765F15 /* RxNuke.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		0C8D254E1BCC33730029A841 /* RxNuke iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0C8D25571BCC33730029A841 /* Build configuration list for PBXNativeTarget "RxNuke iOS" */;
+			buildConfigurationList = 0C8D25571BCC33730029A841 /* Build configuration list for PBXNativeTarget "RxNuke" */;
 			buildPhases = (
 				0C8D254A1BCC33730029A841 /* Sources */,
 				0C8D254B1BCC33730029A841 /* Frameworks */,
@@ -197,45 +112,9 @@
 			);
 			dependencies = (
 			);
-			name = "RxNuke iOS";
+			name = RxNuke;
 			productName = "Nuke-Alamofire-Plugin";
 			productReference = 0C8D254F1BCC33730029A841 /* RxNuke.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		0CD205BE1BCC688800B88F70 /* RxNuke watchOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0CD205C61BCC688800B88F70 /* Build configuration list for PBXNativeTarget "RxNuke watchOS" */;
-			buildPhases = (
-				0CD205BA1BCC688800B88F70 /* Sources */,
-				0CD205BB1BCC688800B88F70 /* Frameworks */,
-				0CD205BC1BCC688800B88F70 /* Headers */,
-				0CD205BD1BCC688800B88F70 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "RxNuke watchOS";
-			productName = "Nuke watchOS Alamofire Plugin";
-			productReference = 0CD205BF1BCC688800B88F70 /* RxNuke.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		0CD205D11BCC693F00B88F70 /* RxNuke macOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0CD205D71BCC693F00B88F70 /* Build configuration list for PBXNativeTarget "RxNuke macOS" */;
-			buildPhases = (
-				0CD205CD1BCC693F00B88F70 /* Sources */,
-				0CD205CE1BCC693F00B88F70 /* Frameworks */,
-				0CD205CF1BCC693F00B88F70 /* Headers */,
-				0CD205D01BCC693F00B88F70 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "RxNuke macOS";
-			productName = "Nuke OSX Alamofire Plugin";
-			productReference = 0CD205D21BCC693F00B88F70 /* RxNuke.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -248,21 +127,9 @@
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Alexander Grebenyuk";
 				TargetAttributes = {
-					0C6A2ED11BDAA3C700765F15 = {
-						CreatedOnToolsVersion = 7.1;
-						LastSwiftMigration = 0800;
-					};
 					0C8D254E1BCC33730029A841 = {
 						CreatedOnToolsVersion = 7.0.1;
 						LastSwiftMigration = 1020;
-					};
-					0CD205BE1BCC688800B88F70 = {
-						CreatedOnToolsVersion = 7.0.1;
-						LastSwiftMigration = 0800;
-					};
-					0CD205D11BCC693F00B88F70 = {
-						CreatedOnToolsVersion = 7.0.1;
-						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -280,37 +147,13 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0C8D254E1BCC33730029A841 /* RxNuke iOS */,
-				0CD205BE1BCC688800B88F70 /* RxNuke watchOS */,
-				0CD205D11BCC693F00B88F70 /* RxNuke macOS */,
-				0C6A2ED11BDAA3C700765F15 /* RxNuke tvOS */,
+				0C8D254E1BCC33730029A841 /* RxNuke */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0C6A2ED01BDAA3C700765F15 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0C8D254D1BCC33730029A841 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CD205BD1BCC688800B88F70 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CD205D01BCC693F00B88F70 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -320,14 +163,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0C6A2ECD1BDAA3C700765F15 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0CC1FD53209EF1B2004162D6 /* RxNuke.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0C8D254A1BCC33730029A841 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -336,79 +171,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0CD205BA1BCC688800B88F70 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0CC1FD51209EF1B1004162D6 /* RxNuke.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CD205CD1BCC693F00B88F70 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0CC1FD52209EF1B2004162D6 /* RxNuke.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		0C6A2ED71BDAA3C700765F15 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
-				INFOPLIST_FILE = "Supporting Files/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.kean.RxNuke;
-				PRODUCT_NAME = RxNuke;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-			};
-			name = Debug;
-		};
-		0C6A2ED81BDAA3C700765F15 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/tvOS",
-				);
-				INFOPLIST_FILE = "Supporting Files/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.kean.RxNuke;
-				PRODUCT_NAME = RxNuke;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-			};
-			name = Release;
-		};
 		0C8D25551BCC33730029A841 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C2EE5C1225A663200743F47 /* RxNuke.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -455,13 +223,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -469,6 +233,7 @@
 		};
 		0C8D25561BCC33730029A841 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C2EE5C1225A663200743F47 /* RxNuke.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -509,13 +274,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -537,7 +297,6 @@
 				);
 				INFOPLIST_FILE = "Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.kean.RxNuke;
 				PRODUCT_NAME = RxNuke;
@@ -563,7 +322,6 @@
 				);
 				INFOPLIST_FILE = "Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.kean.RxNuke;
 				PRODUCT_NAME = RxNuke;
@@ -572,122 +330,9 @@
 			};
 			name = Release;
 		};
-		0CD205C41BCC688800B88F70 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/watchOS",
-				);
-				INFOPLIST_FILE = "Supporting Files/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.kean.RxNuke;
-				PRODUCT_NAME = RxNuke;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.0;
-			};
-			name = Debug;
-		};
-		0CD205C51BCC688800B88F70 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/watchOS",
-				);
-				INFOPLIST_FILE = "Supporting Files/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.kean.RxNuke;
-				PRODUCT_NAME = RxNuke;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.0;
-			};
-			name = Release;
-		};
-		0CD205D81BCC693F00B88F70 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Supporting Files/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.kean.RxNuke;
-				PRODUCT_NAME = RxNuke;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Debug;
-		};
-		0CD205D91BCC693F00B88F70 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
-				);
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "Supporting Files/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.kean.RxNuke;
-				PRODUCT_NAME = RxNuke;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0C6A2ED91BDAA3C700765F15 /* Build configuration list for PBXNativeTarget "RxNuke tvOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0C6A2ED71BDAA3C700765F15 /* Debug */,
-				0C6A2ED81BDAA3C700765F15 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		0C8D25491BCC33730029A841 /* Build configuration list for PBXProject "RxNuke" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -697,29 +342,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0C8D25571BCC33730029A841 /* Build configuration list for PBXNativeTarget "RxNuke iOS" */ = {
+		0C8D25571BCC33730029A841 /* Build configuration list for PBXNativeTarget "RxNuke" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0C8D25581BCC33730029A841 /* Debug */,
 				0C8D25591BCC33730029A841 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0CD205C61BCC688800B88F70 /* Build configuration list for PBXNativeTarget "RxNuke watchOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0CD205C41BCC688800B88F70 /* Debug */,
-				0CD205C51BCC688800B88F70 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0CD205D71BCC693F00B88F70 /* Build configuration list for PBXNativeTarget "RxNuke macOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0CD205D81BCC693F00B88F70 /* Debug */,
-				0CD205D91BCC693F00B88F70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
