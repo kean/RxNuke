@@ -23,6 +23,9 @@
 		0C94CC2B1EEC538D0025B968 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/tvOS/RxSwift.framework; sourceTree = "<group>"; };
 		0C94CC2E1EEC539B0025B968 /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/watchOS/Nuke.framework; sourceTree = "<group>"; };
 		0C94CC2F1EEC539B0025B968 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/watchOS/RxSwift.framework; sourceTree = "<group>"; };
+		0CC3804A225B1EEB0055AD42 /* RxNuke.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = RxNuke.podspec; sourceTree = "<group>"; };
+		0CC3804B225B1EF20055AD42 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0CC3804C225B1EFE0055AD42 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +45,7 @@
 				0C8D255A1BCC33BE0029A841 /* Source */,
 				0C8D25661BCC35880029A841 /* Frameworks */,
 				0C8D255D1BCC33C40029A841 /* Supporting Files */,
+				0CC38049225B1EDF0055AD42 /* Metadata */,
 				0C8D25501BCC33730029A841 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,6 +88,16 @@
 				0C94CC201EEC50D80025B968 /* Nuke.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0CC38049225B1EDF0055AD42 /* Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				0CC3804B225B1EF20055AD42 /* README.md */,
+				0CC3804C225B1EFE0055AD42 /* CHANGELOG.md */,
+				0CC3804A225B1EEB0055AD42 /* RxNuke.podspec */,
+			);
+			name = Metadata;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

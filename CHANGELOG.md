@@ -1,5 +1,9 @@
  [Changelog](https://github.com/kean/RxNuke/releases) for all versions
 
+## RxNuke 0.8.1
+
+- Fix Carthage support by adding a shared scheme 
+
 ## RxNuke 0.8
 
 - Add Swift 5.0 support – [Takuma Osada](https://github.com/takumaosada) in [#11](https://github.com/kean/RxNuke/pull/11)
