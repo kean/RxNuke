@@ -1,5 +1,9 @@
  [Changelog](https://github.com/kean/RxNuke/releases) for all versions
 
+## RxNuke 0.9
+
+- Bump RxSwift dependency to RxSwift 5.0
+
 ## RxNuke 0.8.1
 
 - Fix Carthage support by adding a shared scheme 

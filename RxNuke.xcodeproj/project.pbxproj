@@ -26,6 +26,7 @@
 		0CC3804A225B1EEB0055AD42 /* RxNuke.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = RxNuke.podspec; sourceTree = "<group>"; };
 		0CC3804B225B1EF20055AD42 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0CC3804C225B1EFE0055AD42 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		0CE8A1C4229915710065AAEA /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +97,7 @@
 				0CC3804B225B1EF20055AD42 /* README.md */,
 				0CC3804C225B1EFE0055AD42 /* CHANGELOG.md */,
 				0CC3804A225B1EEB0055AD42 /* RxNuke.podspec */,
+				0CE8A1C4229915710065AAEA /* Cartfile */,
 			);
 			name = Metadata;
 			sourceTree = "<group>";
