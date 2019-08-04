@@ -1,5 +1,9 @@
  [Changelog](https://github.com/kean/RxNuke/releases) for all versions
 
+## RxNuke 0.10
+
+- Bump Nuke dependency to Nuke 8
+
 ## RxNuke 0.9
 
 - Bump RxSwift dependency to RxSwift 5.0

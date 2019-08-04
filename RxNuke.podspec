@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'RxNuke'
-    s.version          = '0.9'
+    s.version          = '0.10'
     s.summary          = 'RxSwift extensions for Nuke'
 
     s.homepage         = 'https://github.com/kean/RxNuke'
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 
     s.module_name = "RxNuke"
 
-    s.dependency 'Nuke', '~> 7.0'
+    s.dependency 'Nuke', '~> 8.0'
     s.dependency 'RxSwift', '~> 5.0'
 
     s.source_files  = 'Source/**/*'
