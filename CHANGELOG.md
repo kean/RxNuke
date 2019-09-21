@@ -1,5 +1,9 @@
  [Changelog](https://github.com/kean/RxNuke/releases) for all versions
 
+## RxNuke 0.11.0
+
+- Add Swift Package Manager Support
+
 ## RxNuke 0.10
 
 - Bump Nuke dependency to Nuke 8
