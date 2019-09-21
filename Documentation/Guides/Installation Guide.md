@@ -1,3 +1,13 @@
+# Swift Package Manager
+
+[Swift Package Manager](https://swift.org/package-manager/) is a dependency manager built into Xcode.
+
+If you are using Xcode 11 or higher, go to **File / Swift Packages / Add Package Dependency...** and enter package repository URL **https://github.com/kean/RxNuke.git**, then follow the instructions.
+
+To remove the dependency, select the project and open **Swift Packages** (which is next to **Build Settings**). You can add and remove packages from this tab.
+
+> Swift Package Manager can also be used [from the command line](https://swift.org/package-manager/).
+
 # CocoaPods
 
 [CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
@@ -6,9 +16,7 @@
 $ gem install cocoapods
 ```
 
-> CocoaPods 1.1.0+ is required to build RxNuke.
-
-To integrate RxNuke into your Xcode project using CocoaPods, specify it in your `Podfile`:
+To integrate Nuke into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
@@ -16,7 +24,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'RxNuke'
+    pod 'RxNuke', '~> 1.0' // Or whatever the latest version is
 end
 ```
 
@@ -37,10 +45,10 @@ $ brew update
 $ brew install carthage
 ```
 
-To integrate RxNuke into your Xcode project using Carthage, specify it in your `Cartfile`:
+To integrate Nuke into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "kean/RxNuke"
+github "kean/RxNuke" ~> 1.0 // Or whatever the latest version is 
 ```
 
-Run `carthage update` to build the framework and drag the built `RxNuke.framework` into your Xcode project.
+Run `carthage update` to build the framework and drag the built `RxNuke.framework` into your Xcode project along with all of the dependencies.

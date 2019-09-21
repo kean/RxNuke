@@ -2,7 +2,7 @@
 
 <p align="center">
 <img src="https://img.shields.io/cocoapods/v/RxNuke.svg?label=version">
-<img src="https://img.shields.io/badge/supports-CocoaPods%20%7C%20Carthage-green.svg">
+<img src="https://img.shields.io/badge/supports-Swift%20Package%20Manager%2C%20CocoaPods%2C%20Carthage-green.svg">
 <img src="https://img.shields.io/badge/platforms-iOS%20%7C%20macOS%20%7C%20watchOS%20%7C%20tvOS-lightgrey.svg">
 </p>
 
