@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
     s.module_name = "RxNuke"
 
     s.dependency 'Nuke', '~> 8.0'
-    s.dependency 'RxSwift', '~> 5.0'
+    s.dependency 'RxSwift', '~> 5.1.0'
 
     s.source_files  = 'Source/**/*'
 end
