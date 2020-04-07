@@ -1,5 +1,9 @@
  [Changelog](https://github.com/kean/RxNuke/releases) for all versions
 
+## RxNuke 0.12.0
+
+- Increase the minimum requirred RxSwift version to 5.1 - the version with hard-deprecated `UIWebView` APIs removed
+
 ## RxNuke 0.11.0
 
 - Add Swift Package Manager Support
