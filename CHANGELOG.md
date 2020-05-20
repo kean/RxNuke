@@ -1,5 +1,10 @@
  [Changelog](https://github.com/kean/RxNuke/releases) for all versions
 
+## RxNuke 0.13.0
+
+- Update to Nuke 9
+- Bump minimum platform version requirements. The minimum iOS version is now iOS 11 which is a 64-bit only system. This is great news if you are installing your dependencies using Carthage as Nuke is now going to compile twice as fast: no need to compile for `i386` and `armv7` anymore.
+
 ## RxNuke 0.12.0
 
 - Increase the minimum requirred RxSwift version to 5.1 - the version with hard-deprecated `UIWebView` APIs removed

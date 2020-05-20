@@ -1,2 +1,2 @@
-github "kean/Nuke" ~> 8.0
+github "kean/Nuke" ~> 9.0.0
 github "ReactiveX/RxSwift" ~> 5.1.0

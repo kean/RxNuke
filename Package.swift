@@ -4,10 +4,10 @@ import PackageDescription
 let package = Package(
     name: "RxNuke",
     platforms: [
-        .macOS(.v10_12),
-        .iOS(.v10),
-        .tvOS(.v10),
-        .watchOS(.v3)
+        .macOS(.v10_13),
+        .iOS(.v11),
+        .tvOS(.v11),
+        .watchOS(.v4)
     ],
     products: [
         .library(name: "RxNuke", targets: ["RxNuke"]),
@@ -15,7 +15,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/kean/Nuke.git",
-            from: "8.0.0"
+            from: "9.0.0"
         ),
         .package(
             url: "https://github.com/ReactiveX/RxSwift.git",
