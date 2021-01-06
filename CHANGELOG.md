@@ -1,5 +1,9 @@
  [Changelog](https://github.com/kean/RxNuke/releases) for all versions
 
+## RxNuke 2.0.0
+
+- Update to RxSwift 6.0
+
 ## RxNuke 1.0.0
 
 - Update to Nuke 9
