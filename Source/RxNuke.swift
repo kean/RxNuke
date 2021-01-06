@@ -28,14 +28,14 @@ public extension Reactive where Base: ImagePipeline {
                 single(.success(ImageResponse(container: image))) // return synchronously
                 return Disposables.create() // nop
             } else {
-                let task = self.base.loadImage(with: request) { result in
+                let task = self.base.loadImage(with: request, completion: { result in
                     switch result {
                     case let .success(response):
                         single(.success(response))
                     case let .failure(error):
-                        single(.error(error))
+                        single(.failure(error))
                     }
-                }
+                })
                 return Disposables.create { task.cancel() }
             }
         }
