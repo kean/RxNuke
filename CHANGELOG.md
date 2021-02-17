@@ -1,5 +1,9 @@
  [Changelog](https://github.com/kean/RxNuke/releases) for all versions
 
+## RxNuke 2.0.1
+
+- Fix the dependency version range – [#20](https://github.com/kean/RxNuke/pull/20) 
+
 ## RxNuke 2.0.0
 
 - Update to RxSwift 6.0
