@@ -19,7 +19,7 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/ReactiveX/RxSwift.git",
-            from: "6.0.0"
+            .upToNextMajor(from: "6.0.0")
         )
     ],
     targets: [
