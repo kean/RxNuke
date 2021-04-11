@@ -8,25 +8,7 @@
 
 This repository contains [RxSwift](https://github.com/ReactiveX/RxSwift) extensions for [Nuke](https://github.com/kean/Nuke) as well as examples of common [use cases](#h_use_cases) solved by Rx.
 
-
-# <a name="h_use_cases"></a>Use Cases
-
-- [Going From Low to High Resolution](#huc_low_to_high) 
-- [Loading the First Available Image](#huc_loading_first_avail)
-- [Load Multiple Images, Display All at Once](#huc_load_multiple_display_once)
-- [Showing Stale Image While Validating It](#huc_showing_stale_first)
-- [Auto Retry](#huc_auto_retry)
-- [Tracking Activities](#huc_activity_indicator)
-- [Display Placeholder on Failure](#huc_placeholder_on_fail)
-- [Table or Collection View](#huc_table_collection_view)
-
-# <a name="h_getting_started"></a>Getting Started
-
-- [Installation Guide](https://github.com/kean/RxNuke/blob/master/Documentation/Guides/Installation%20Guide.md)
-- [Getting Started with RxSwift](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/GettingStarted.md)
-
-
-# <a name="h_usage"></a>Usage
+# Usage
 
 RxNuke provides a set of reactive extensions for Nuke:
 
@@ -38,6 +20,7 @@ extension Reactive where Base: ImagePipeline {
 ```
 
 > A `Single` is a variation of `Observable` that, instead of emitting a series of elements, is always guaranteed to emit either a single element or an error. The common use case of `Single` is to wrap HTTP requests. See [Traits](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/Traits.md#single) for more info.
+{:.info}
 
 Here's a basic example where we load an image and display the result on success:
 
@@ -47,11 +30,14 @@ ImagePipeline.shared.rx.loadImage(with: url)
     .disposed(by: disposeBag)
 ```
 
-### <a name="huc_low_to_high"></a>Going From Low to High Resolution
+## Going From Low to High Resolution
 
-Suppose you want to show users a high-resolution, slow-to-download image. Rather than let them stare a placeholder for a while, you might want to quickly download a smaller thumbnail first. 
+Let's say you want to show a user a high-resolution image that takes a while to loads. You can show a spinner while the high-resolution image is downloaded, but you can improve the user experience by quickly downloading and displaying a thumbnail.
 
-You can implement this using [`concat`](http://reactivex.io/documentation/operators/concat.html) operator which results in a **serial** execution. It would first start a thumbnail request, wait until it finishes, and only then start a request for a high-resolution image.
+> As an alternative, Nuke also supports progressive JPEG. To learn about it, see a [dedicated guide](/nuke/guides/progressive-decoding).
+{:.info}
+
+You can implement it using [`concat`](http://reactivex.io/documentation/operators/concat.html) operator. This operator results in a serial execution. It starts a thumbnail request, waits until it finishes, and only then starts a request for a high-resolution image.
 
 ```swift
 Observable.concat(pipeline.rx.loadImage(with: lowResUrl).orEmpty,
@@ -62,18 +48,21 @@ Observable.concat(pipeline.rx.loadImage(with: lowResUrl).orEmpty,
 
 > `orEmpty` is a custom property which ignores errors and completes the sequence instead
 > (equivalent to `func catchErrorJustComplete()` from [RxSwiftExt](https://github.com/RxSwiftCommunity/RxSwiftExt).
->
->     extension RxSwift.PrimitiveSequence {
->         public var orEmpty: Observable<Element> {
->             return self.asObservable().catchError { _ in .empty() }
->         }
->     }
+{:.info}
 
-### <a name="huc_loading_first_avail"></a>Loading the First Available Image
+```swift
+public extension RxSwift.PrimitiveSequence {
+    var orEmpty: Observable<Element> {
+        asObservable().catchError { _ in .empty() }
+    }
+}
+````
 
-Suppose you have multiple URLs for the same image. For instance, you might have uploaded an image taken from the camera. In such case, it would be beneficial to first try to get the local URL, and if that fails, try to get the network URL. It would be a shame to download the image that we may have already locally.
+## Loading the First Available Image
 
-This use case is very similar [Going From Low to High Resolution](#huc_low_to_high), but an addition of `.take(1)` guarantees that we stop execution as soon as we receive the first result.
+Let's say you have multiple URLs for the same image. For example, you uploaded the image from the camera to the server; you have the image stored locally. When you display this image, it would be beneficial to first load the local URL, and if that fails, try to download from the network.
+
+This use case is very similar to [Going From Low to High Resolution](#going-from-low-to-high-resolution), except for the addition of the `.take(1)` operator that stops the execution when the first value is received.
 
 ```swift
 Observable.concat(pipeline.rx.loadImage(with: localUrl).orEmpty,
@@ -84,9 +73,9 @@ Observable.concat(pipeline.rx.loadImage(with: localUrl).orEmpty,
 ```
 
 
-### <a name="huc_load_multiple_display_once"></a>Load Multiple Images, Display All at Once
+## Load Multiple Images, Display All at Once
 
-Suppose you want to load two icons for a button, one icon for `.normal` state and one for `.selected` state. Only when both icons are loaded you can show the button to the user. This can be done using a [`combineLatest`](http://reactivex.io/documentation/operators/combinelatest.html) operator:
+Let's say you want to load two icons for a button, one icon for a `.normal` state, and one for a `.selected` state. You want to update the button, only when both icons are fully loaded. This can be achieved using a [`combineLatest`](http://reactivex.io/documentation/operators/combinelatest.html) operator.
 
 ```swift
 Observable.combineLatest(pipeline.rx.loadImage(with: iconUrl).asObservable(),
@@ -98,10 +87,9 @@ Observable.combineLatest(pipeline.rx.loadImage(with: iconUrl).asObservable(),
     }).disposed(by: disposeBag)
 ```
 
+## Showing Stale Image While Validating It
 
-### <a name="huc_showing_stale_first"></a>Showing Stale Image While Validating It
-
-Suppose you want to show users a stale image stored in a disk cache (`Foundation.URLCache`) while you go to the server to validate it. This use case is actually similar to [Going From Low to High Resolution](#huc_low_to_high).
+Let's say you want to show the user a stale image stored in disk cache (`Foundation.URLCache`) while you go to the server to validate if the image is still fresh. It can be implemented using the same `append` operator that we covered [previously](#going-from-low-to-high-resolution).
 
 ```swift
 let cacheRequest = URLRequest(url: imageUrl, cachePolicy: .returnCacheDataDontLoad)
@@ -113,10 +101,10 @@ Observable.concat(pipeline.rx.loadImage(with: ImageRequest(urlRequest: cacheRequ
     .disposed(by: disposeBag)
 ```
 
-> See [Image Caching](https://kean.github.io/post/image-caching) to learn more about HTTP cache
+> See ["Image Caching"](/post/image-caching) to learn more about HTTP cache.
+{:.info}
 
-
-### <a name="huc_auto_retry"></a>Auto Retry
+## Auto Retry
 
 Auto-retry with an exponential backoff of other delay options (including immediate retry when a network connection is re-established) using [smart retry](https://kean.github.io/post/smart-retry).
 
@@ -128,7 +116,7 @@ pipeline.rx.loadImage(with: request).asObservable()
  ```
 
 
-### <a name="huc_activity_indicator"></a>Tracking Activities
+## Tracking Activities
 
 Suppose you want to show an activity indicator while waiting for an image to load. Here's how you can do it using `ActivityIndicator` class provided by [`RxSwiftUtilities`](https://github.com/RxSwiftCommunity/RxSwiftUtilities):
 
@@ -146,7 +134,7 @@ isBusy.asDriver()
 ```
 
 
-### <a name="huc_table_collection_view"></a>In a Table or Collection View
+## In a Table or Collection View
 
 Here's how you can integrate the code provided in the previous examples into your table or collection view cells:
 
