@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 import PackageDescription
 
 let package = Package(
@@ -15,7 +15,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/kean/Nuke.git",
-            from: "9.0.0"
+            from: "10.0.0"
         ),
         .package(
             url: "https://github.com/ReactiveX/RxSwift.git",

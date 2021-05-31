@@ -1,11 +1,5 @@
 <p align="center"><img src="https://user-images.githubusercontent.com/1567433/34322222-f47252a6-e832-11e7-972c-fb48d8ec97dc.png" height="180"/>
 
-<p align="center">
-<img src="https://img.shields.io/cocoapods/v/RxNuke.svg?label=version">
-<img src="https://img.shields.io/badge/supports-Swift%20Package%20Manager%2C%20CocoaPods%2C%20Carthage-green.svg">
-<img src="https://img.shields.io/badge/platforms-iOS%20%7C%20macOS%20%7C%20watchOS%20%7C%20tvOS-lightgrey.svg">
-</p>
-
 This repository contains [RxSwift](https://github.com/ReactiveX/RxSwift) extensions for [Nuke](https://github.com/kean/Nuke) as well as examples of common [use cases](#h_use_cases) solved by Rx.
 
 # Usage
@@ -166,9 +160,9 @@ final class ImageCell: UICollectionViewCell {
 
 | RxNuke           | Swift                 | Xcode                | Platforms                                          |
 |------------------|-----------------------|----------------------|----------------------------------------------------|
+| RxNuke 3.0      | Swift 5.3       | Xcode 12.0      | iOS 11.0 / watchOS 4.0 / macOS 10.13 / tvOS 11.0  |
 | RxNuke 1.0      | Swift 5.1       | Xcode 11.0      | iOS 11.0 / watchOS 4.0 / macOS 10.13 / tvOS 11.0  |
-| RxNuke 0.8       | Swift 4.2 – 5.0       | Xcode 10.1 – 10.2    | iOS 10.0 / watchOS 3.0 / macOS 10.12 / tvOS 10.0   |
-| RxNuke 0.7       | Swift 4.0 – 4.2       | Xcode 9.2 – 10.1     | iOS 9.0 / watchOS 2.0 / macOS 10.10 / tvOS 9.0     | 
+| RxNuke 0.8       | Swift 4.2 – 5.0       | Xcode 10.1 – 10.2    | iOS 10.0 / watchOS 3.0 / macOS 10.12 / tvOS 10.0   | 
 
 # License
 

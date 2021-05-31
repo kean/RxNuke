@@ -24,7 +24,7 @@ public extension Reactive where Base: ImagePipeline {
     /// image was found in memory cache.
     func loadImage(with request: ImageRequest) -> Single<ImageResponse> {
         return Single<ImageResponse>.create { single in
-            if let image = self.base.cachedImage(for: request) {
+            if let image = self.base.cache[request] {
                 single(.success(ImageResponse(container: image))) // return synchronously
                 return Disposables.create() // nop
             } else {
