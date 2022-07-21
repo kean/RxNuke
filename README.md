@@ -158,11 +158,10 @@ final class ImageCell: UICollectionViewCell {
 <a name="h_requirements"></a>
 # Requirements
 
-| RxNuke           | Swift                 | Xcode                | Platforms                                          |
-|------------------|-----------------------|----------------------|----------------------------------------------------|
-| RxNuke 3.0      | Swift 5.3       | Xcode 12.0      | iOS 11.0 / watchOS 4.0 / macOS 10.13 / tvOS 11.0  |
-| RxNuke 1.0      | Swift 5.1       | Xcode 11.0      | iOS 11.0 / watchOS 4.0 / macOS 10.13 / tvOS 11.0  |
-| RxNuke 0.8       | Swift 4.2 – 5.0       | Xcode 10.1 – 10.2    | iOS 10.0 / watchOS 3.0 / macOS 10.12 / tvOS 10.0   | 
+| RxNuke      | Swift            | Xcode              | Platforms                                         |
+|-------------|------------------|--------------------|---------------------------------------------------|
+| RxNuke 4.0  | Swift 5.6        | Xcode 13.3         | iOS 13.0 / watchOS 6.0 / macOS 10.15 / tvOS 13.0  |
+| RxNuke 3.0  | Swift 5.3        | Xcode 12.0         | iOS 11.0 / watchOS 4.0 / macOS 10.13 / tvOS 11.0  |
 
 # License
 
