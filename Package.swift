@@ -15,7 +15,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/kean/Nuke.git",
-            from: "11.0.0"
+            from: "12.0.0"
         ),
         .package(
             url: "https://github.com/ReactiveX/RxSwift.git",

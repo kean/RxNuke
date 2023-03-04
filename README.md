@@ -160,6 +160,7 @@ final class ImageCell: UICollectionViewCell {
 
 | RxNuke      | Swift            | Xcode              | Platforms                                         |
 |-------------|------------------|--------------------|---------------------------------------------------|
+| RxNuke 5.0  | Swift 5.6        | Xcode 13.3         | iOS 13.0 / watchOS 6.0 / macOS 10.15 / tvOS 13.0  |
 | RxNuke 4.0  | Swift 5.6        | Xcode 13.3         | iOS 13.0 / watchOS 6.0 / macOS 10.15 / tvOS 13.0  |
 | RxNuke 3.0  | Swift 5.3        | Xcode 12.0         | iOS 11.0 / watchOS 4.0 / macOS 10.13 / tvOS 11.0  |
 
