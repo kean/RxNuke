@@ -26,7 +26,7 @@ ImagePipeline.shared.rx.loadImage(with: url)
 
 ## Going From Low to High Resolution
 
-Let's say you want to show a user a high-resolution image that takes a while to loads. You can show a spinner while the high-resolution image is downloaded, but you can improve the user experience by quickly downloading and displaying a thumbnail.
+Let's say you want to show a user a high-resolution image that takes a while it loads. You can show a spinner while the high-resolution image is downloaded, but you can improve the user experience by quickly downloading and displaying a thumbnail.
 
 > As an alternative, Nuke also supports progressive JPEG. To learn about it, see a [dedicated guide](/nuke/guides/progressive-decoding).
 {:.info}
@@ -40,7 +40,7 @@ Observable.concat(pipeline.rx.loadImage(with: lowResUrl).orEmpty,
     .disposed(by: disposeBag)
 ```
 
-> `orEmpty` is a custom property which ignores errors and completes the sequence instead
+> `orEmpty` is a custom property that ignores errors and completes the sequence instead
 > (equivalent to `func catchErrorJustComplete()` from [RxSwiftExt](https://github.com/RxSwiftCommunity/RxSwiftExt).
 {:.info}
 
